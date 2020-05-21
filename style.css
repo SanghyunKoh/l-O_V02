@@ -9,6 +9,36 @@ body {
       
   }
 
+
+
+  .intro {
+    /* display: none; */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      /* bring your own prefixes */
+      transform: translate(-50%, -50%);
+      max-height: 100%;
+      max-width: 100%;
+      z-index: 100;
+  }
+  
+  .intro:hover {
+    cursor: pointer;
+  }
+  
+  .card-one {
+    width: 100vw;
+  }
+  
+  .card-two {
+    display: none;
+  }
+  
+  .card-three {
+    display: none;
+  }
+
   .cardContainer {
     width: 100%;
     height:100%;
@@ -42,8 +72,12 @@ body {
     left: 50%;
     /* bring your own prefixes */
     transform: translate(-50%, -50%);
- 
-}
+  }
+
+  .popup:hover {
+    cursor: pointer;
+  }
+
 
 
 

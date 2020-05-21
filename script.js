@@ -1,4 +1,31 @@
 
+  $('.card-one').click(
+    function(){
+      $('.card-one').delay(100).fadeToggle( "slow", "linear" );
+      $('.card-two').delay(800).fadeToggle( "slow", "linear" );
+    }
+  )
+
+  $('.card-two').click(
+    function(){
+      $('.card-two').toggle();
+      $('.card-three').delay(500).fadeToggle( "slow", "linear" );
+    }
+  )
+
+  $('.card-three').click(
+    function(){
+      $('.card-three').delay(300).fadeToggle( "slow", "linear" );
+  
+    }
+  )
+
+
+
+
+
+
+
 if ( $(window).width() > 769){
         //using gsap.set() takes care of all vendor-prefixes
         gsap.set(".cardWrapper", {perspective:500});
