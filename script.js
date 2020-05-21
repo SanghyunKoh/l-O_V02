@@ -2,23 +2,18 @@
   $('.card-one').click(
     function(){
       $('.card-one').delay(100).fadeToggle( "slow", "linear" );
-      $('.card-two').delay(800).fadeToggle( "slow", "linear" );
+      $('.card-two').delay(600).fadeToggle( "slow", "linear" );
     }
   )
 
   $('.card-two').click(
     function(){
-      $('.card-two').toggle();
-      $('.card-three').delay(500).fadeToggle( "slow", "linear" );
+      $('.card-two').fadeToggle( "slow", "linear" );
+      $('.card-three').delay(700).fadeToggle( "slow", "linear" );
     }
   )
 
-  $('.card-three').click(
-    function(){
-      $('.card-three').delay(300).fadeToggle( "slow", "linear" );
-  
-    }
-  )
+
 
 
 
@@ -68,6 +63,14 @@ if ( $(window).width() > 769){
         };
 
 
+        $('.card-three').click(
+          function(){
+            $('.card-three').delay(100).fadeToggle( "slow", "linear" );
+        
+          }
+        )
+      
+
     }
 
     
@@ -87,5 +90,12 @@ $(".cardWrapper").mousedown(
     }
   );
 
+  $('.card-three').click(
+    function(){
+      $('.card-three').delay(300).fadeToggle( "slow", "linear" );
+      $('.layer').delay(300).fadeToggle( "slow", "linear" );
+    
+    }
+  )
 
 }
