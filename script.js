@@ -75,19 +75,25 @@ else {
 
   $('.card-one').click(
     function(){
-      $('.card-one').fadeToggle( "slow", "linear" );
-      $('.card-two').toggle();
+      $('.card-one').delay(100).fadeToggle( "slow", "linear" );
+      $('.card-two').delay(600).fadeToggle( "slow", "linear" );
    
     }
   )
 
   $('.card-two').click(
     function(){
-      $('.card-two').toggle();
-      $('.card-three').toggle();
+      $('.card-two').fadeToggle( "slow", "linear" );
+      $('.card-three').delay(500).fadeToggle( "slow", "linear" );
     }
   )
-
+  $('.card-three').click(
+    function(){
+      $('.card-three').toggle();
+      $('.layer').fadeToggle("slow", "linear");
+    
+    }
+  )
 
 
   gsap.set(".cardWrapper", {perspective:500});
@@ -146,12 +152,6 @@ gsap.config({
 
 
 
-  $('.card-three').click(
-    function(){
-      $('.card-three').toggle();
-      $('.layer').fadeToggle("slow", "linear");
-    
-    }
-  )
+
 
 }
