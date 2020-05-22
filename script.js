@@ -1,27 +1,22 @@
 
+if ( $(window).width() > 769){
+
   $('.card-one').click(
     function(){
-      $('.card-one').delay(100).fadeToggle( "slow", "linear" );
-      $('.card-two').delay(600).fadeToggle( "slow", "linear" );
+      $('.card-one').fadeToggle( "slow", "linear" );
+      $('.card-two').toggle();
+   
     }
   )
 
   $('.card-two').click(
     function(){
-      $('.card-two').fadeToggle( "slow", "linear" );
-      $('.card-three').delay(700).fadeToggle( "slow", "linear" );
+      $('.card-two').toggle();
+      $('.card-three').toggle();
     }
   )
 
 
-
-
-
-
-
-
-
-if ( $(window).width() > 769){
         //using gsap.set() takes care of all vendor-prefixes
         gsap.set(".cardWrapper", {perspective:500});
         gsap.set(".card", {transformStyle:"preserve-3d"});
@@ -65,7 +60,7 @@ if ( $(window).width() > 769){
 
         $('.card-three').click(
           function(){
-            $('.card-three').delay(100).fadeToggle( "slow", "linear" );
+            $('.card-three').toggle();
         
           }
         )
@@ -76,24 +71,85 @@ if ( $(window).width() > 769){
     
 //change function on mobile version 
 else {
-gsap.set(".cardWrapper", {perspective:500});
+
+
+  $('.card-one').click(
+    function(){
+      $('.card-one').fadeToggle( "slow", "linear" );
+      $('.card-two').toggle();
+   
+    }
+  )
+
+  $('.card-two').click(
+    function(){
+      $('.card-two').toggle();
+      $('.card-three').toggle();
+    }
+  )
+
+
+
+  gsap.set(".cardWrapper", {perspective:500});
 gsap.set(".card", {transformStyle:"preserve-3d"});
 gsap.set(".back", {rotationY:-180});
 gsap.set([".back", ".front"], {backfaceVisibility:"hidden"});
+gsap.config({
+    nullTargetWarn: false,
+});
 
-$(".cardWrapper").mousedown(
-    function() {
-      gsap.to($(this).find(".card"), {duration: 1.2, rotationY:180, ease:Back.easeOut});
-    })
-    .mouseup(function() {
-      gsap.to($(this).find(".card"), {duration: 1.2, rotationY:0, ease:Back.easeIn});  
-    }
-  );
+
+
+  $(function () {
+    
+    var $card = $(".cardWrapper"),
+    timelines = [],
+    build = function() {
+        $card.each(function() {
+            var $this = $(this),
+            
+            timeline = new TimelineMax({paused: true});
+            timelines.push(
+                timeline.add([
+                    TweenMax.to($this.find(".card"), 1, {
+                        rotationY: 180,
+                        ease: Back.easeInOut,
+                        onComplete: flip,
+                        onCompleteParams: [ $this ],
+                        onReverseComplete: flip,
+                        onReverseCompleteParams: [ $this ]
+                    })
+                ])
+            );
+            $this.on({
+                click: function(e) {
+                    var index = $(e.currentTarget).index();
+                    if($(this).hasClass('flipped')) {
+                        timelines[index].reverse();
+                    } else {
+                        timelines[index].play();
+                    }
+                }
+            });
+        });
+    },
+    flip = function( $element ) {
+        $element.toggleClass('flipped');
+    };
+    
+    
+    build();
+    
+});
+  
+
+
+
 
   $('.card-three').click(
     function(){
-      $('.card-three').delay(300).fadeToggle( "slow", "linear" );
-      $('.layer').delay(300).fadeToggle( "slow", "linear" );
+      $('.card-three').toggle();
+      $('.layer').fadeToggle("slow", "linear");
     
     }
   )
