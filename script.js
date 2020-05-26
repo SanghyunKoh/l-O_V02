@@ -1,20 +1,20 @@
 
 if ( $(window).width() > 769){
 
-  $('.card-one').click(
-    function(){
-      $('.card-one').delay(100).fadeToggle( "slow", "linear" );
-      $('.card-two').delay(600).fadeToggle( "slow", "linear" );
-   
-    }
-  )
+      $('.card-one').click(
+        function(){
+          $('.card-one').delay(100).fadeToggle( "slow", "linear" );
+          $('.card-two').delay(600).fadeToggle( "slow", "linear" );
+      
+        }
+      )
 
-  $('.card-two').click(
-    function(){
-      $('.card-two').fadeToggle( "slow", "linear" );
-      $('.card-three').delay(500).fadeToggle( "slow", "linear" );
-    }
-  )
+      $('.card-two').click(
+        function(){
+          $('.card-two').fadeToggle( "slow", "linear" );
+          $('.card-three').delay(500).fadeToggle( "slow", "linear" );
+        }
+      )
 
 
         //using gsap.set() takes care of all vendor-prefixes
@@ -112,35 +112,37 @@ gsap.config({
     timelines = [],
     build = function() {
         $card.each(function() {
-            var $this = $(this),
+            var $this = $(this);
+            // timelines.push(
+            //     timeline.add([
+            //         gsap.to($this.find(".card"), 1, {
+            //             rotationY: -180,
+            //             ease: Back.easeInOut,
+            //             onComplete: flip,
+            //             onCompleteParams: ["self"],
+            //             onReverseComplete: flip,
+            //             onReverseCompleteParams: [ $this ]
+            //         })
+            //     ])
+            // );
+
             
-            timeline = new TimelineMax({paused: true});
-            timelines.push(
-                timeline.add([
-                    TweenMax.to($this.find(".card"), 1, {
-                        rotationY: 180,
-                        ease: Back.easeInOut,
-                        onComplete: flip,
-                        onCompleteParams: [ $this ],
-                        onReverseComplete: flip,
-                        onReverseCompleteParams: [ $this ]
-                    })
-                ])
-            );
             $this.on({
                 click: function(e) {
                     var index = $(e.currentTarget).index();
                     if($(this).hasClass('flipped')) {
-                        timelines[index].reverse();
+                      gsap.to($(this).find(".card"), {duration: 1.2, rotationY:0, ease:Back.easeOut});  
+                      $(this).toggleClass('flipped');
+                        // timelines[index].reverse();
                     } else {
-                        timelines[index].play();
+                      gsap.to($(this).find(".card"), {duration: 1.2, rotationY:180, ease:Back.easeOut});
+                      $(this).toggleClass('flipped');
+                        // timelines[index].play();
                     }
                 }
             });
         });
-    },
-    flip = function( $element ) {
-        $element.toggleClass('flipped');
+        console.log('this');
     };
     
     
